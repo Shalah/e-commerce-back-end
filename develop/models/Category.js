@@ -2,6 +2,11 @@ const { Model, DataTypes } = require('sequelize');
 
 const sequelize = require('../config/connection.js');
 
+// Importing same folder connections
+const Product = require('./Product');
+const ProductTag = require('./ProductTag');
+const Tag = require('./Tag');
+
 class Category extends Model {}
 
 Category.init(
@@ -9,8 +14,8 @@ Category.init(
     // define columns
     id: {
       type: DataTypes.INTEGER,
-      allowNull: false,
       primaryKey: true,
+      allowNull: false,
       autoIncrement: true
     },
     category_name: {

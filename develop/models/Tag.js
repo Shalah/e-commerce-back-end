@@ -2,11 +2,26 @@ const { Model, DataTypes } = require('sequelize');
 
 const sequelize = require('../config/connection.js');
 
+// Importing same folder connections
+const Category = require('./Category');
+const Product = require('./Product');
+const ProductTag = require('./ProductTag');
+
 class Tag extends Model {}
 
 Tag.init(
   {
     // define columns
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      allowNull: false,
+      autoIncrement: true
+    },
+    tag_name: {
+      type: DataTypes.STRING,
+      allowNull: false
+    }
   },
   {
     sequelize,
