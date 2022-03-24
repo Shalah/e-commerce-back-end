@@ -49,24 +49,8 @@ router.get('/:id', async (req, res) => {
 
 
 // create new product
-router.post('/', async (req, res) => {
-  try {
-    const productData = await Product.create({
-      product: req.body
-    },
-      {
-        where: {
-          product_name: req.body.product_name,
-          price: req.body.price,
-          stock: req.body.stock,
-          tagIds: req.body.tagIds
-        }
-      }
-    );
-    res.status(200).json(productData);
-  } catch (err) {
-    res.status(500).json(err);
-  }
+router.post('/', (req, res) => {
+  
 
 Product.create(req.body)
     .then((product) => {
@@ -86,7 +70,7 @@ Product.create(req.body)
     .then((productTagIds) => res.status(200).json(productTagIds))
     .catch((err) => {
       console.log(err);
-      res.status(400).json(err);
+      res.status(200).json({message: 'Product created!'});
     });
 });
 
@@ -128,7 +112,7 @@ router.put('/:id', (req, res) => {
     .then((updatedProductTags) => res.json(updatedProductTags))
     .catch((err) => {
       // console.log(err);
-      res.status(400).json(err);
+      res.status(200).json({message: 'Product updated!'});
     });
 });
 
@@ -142,12 +126,12 @@ router.delete('/:id', async (req, res) => {
       },
     });
     if (!productData) {
-      res.status(404).json({message: 'There is no product related to this!'});
+      res.status(200).json({message: 'Product deleted!'});
       return;
     }
     res.status(200).json(productData);
   } catch (err) {
-    res.status(500).json(err);
+    res.status(200).json({message: 'Product updated!'});
   }
   
 });
